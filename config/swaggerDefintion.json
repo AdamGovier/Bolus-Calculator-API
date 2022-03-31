@@ -1,0 +1,12 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bolus Calculator API Definition",
+        "version": "1.0.0",
+        "description": "This API was desgined to serve the Bolus Calculator application.",
+        "contact": {
+            "name": "Adam Govier",
+            "email": "adam@govier-web.co.uk"
+        }
+    }
+}
