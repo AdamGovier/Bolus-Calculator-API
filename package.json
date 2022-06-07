@@ -16,9 +16,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-fileupload": "^1.4.0",
     "joi": "^17.6.0",
     "mongoose": "^6.2.9",
+    "multer": "^1.4.5-lts.1",
     "swagger-jsdoc": "5.0.1",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "uuid": "^8.3.2"
   }
 }

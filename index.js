@@ -1,6 +1,7 @@
 // Express & Middleware imports.
 import express from 'express';
 import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
 import cors from 'cors';
 
 // Documentation imports.
@@ -22,7 +23,10 @@ mongoose.connect("mongodb://localhost:27017/boluscalc");
 app.use(cors());
 
 // Parse JSON bodys.
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+// Retrieve uploaded files.
+app.use(fileUpload());
 
 // Import Routes
 import hotshotsRoute from "./api/Hotshots/hotshots.routes.js";
