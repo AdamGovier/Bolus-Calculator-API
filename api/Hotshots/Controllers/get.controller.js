@@ -5,7 +5,7 @@ export default async (req, res) => {
     const {type, value} = req.params;
 
     if(type !== "barcode" && type !== "keyword") 
-        return res.json(new ErrorResponse("Incorrect paramter provided (type), please refer to documentation."));
+        return res.status(400).json(new ErrorResponse("Incorrect paramter provided (type), please refer to documentation."));
     
     if(type === "keyword") {
         // Find a hotshot including the keyword.

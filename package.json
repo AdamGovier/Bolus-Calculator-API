@@ -10,10 +10,13 @@
   "author": "Adam Govier",
   "license": "ISC",
   "dependencies": {
+    "barcoder": "^2.0.1",
+    "body-parser": "^1.20.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "joi": "^17.6.0",
     "mongoose": "^6.2.9",
     "swagger-jsdoc": "5.0.1",
     "swagger-ui-express": "^4.3.0"

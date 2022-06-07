@@ -1,5 +1,6 @@
 // Controllers
 import getController from './Controllers/get.controller.js';
+import createController from './Controllers/create.controller.js';
 
 // Responses
 import ErrorResponse from '../Responses/error.response.js';
@@ -71,8 +72,10 @@ const router = express.Router();
  *                                        example: 9310174024827
  */
 router.get('/get/:type/:value', getController);
-router.get('/get/', (req, res) => res.json(new ErrorResponse("Missing required url parameters (type, value), please refer to the documentation.")));
-router.get('/get/:type', (req, res) => res.json(new ErrorResponse("Missing required url parameter (value), please refer to the documentation.")));
+router.get('/get/', (req, res) => res.status(400).json(new ErrorResponse("Missing required url parameters (type, value), please refer to the documentation.")));
+router.get('/get/:type', (req, res) => res.status(400).json(new ErrorResponse("Missing required url parameter (value), please refer to the documentation.")));
 
+router.post('/create', createController);
+router.get('/create', (req, res) => res.status(400).json(new ErrorResponse("GET method not supported, did you mean to use the POST method?")));
 
 export default router;
