@@ -23,8 +23,8 @@ export default async (req, res) => {
                 return {
                     _id : hotshot._id.toString(),
                     name: hotshot.name,
-                    carbs: hotshot.carbohydrates,
-                    weight: hotshot.weight,
+                    carbs: parseFloat(hotshot.carbohydrates),
+                    weight: parseFloat(hotshot.weight),
                     imagePath: hotshot.imagePath,
                     barcode: hotshot.barcode
                 }

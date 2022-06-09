@@ -6,7 +6,7 @@ export default async function (req) {
     if(!req.files) return undefined;
 
     // Target submitted file with the key of file.
-    const file = req.files['file'];
+    const file = req.files['image'];
     if(!file) return undefined;
 
     const extention = path.extname(file.name).toLowerCase();

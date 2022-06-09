@@ -4,7 +4,7 @@ import hotshotSchema from "../Models/hotshot.schema.js";
 import fileHandler from "../Helpers/fileHandler.js";
 
 export default async (req, res) => {
-    if(!req.is('multipart/form-data')) return res.status(415).json(new ErrorResponse("Expecting content-type of 'application/json'."));
+    if(!req.is('multipart/form-data')) return res.status(415).json(new ErrorResponse("Expecting content-type of 'multipart/form-data'."));
     
     const validate = hotshotVSchema.validate(req.body);
     if(validate.error) return res.status(400).json(new ErrorResponse(validate.error.details));
