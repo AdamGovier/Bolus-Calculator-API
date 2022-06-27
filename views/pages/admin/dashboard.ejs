@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../../partials/head.ejs'); -%>
+<body>
+    <main>
+        <%- include('../../partials/header.ejs'); -%>
+        <div id="dashboard">
+            <h5>Statistics</h5>
+            <div class="itemRow">
+                <div class="item stat">
+                    <h1>Uptime</h1>
+                    <p><%= uptime.toFixed(0) %>s</p>
+                </div>
+                <div class="item stat">
+                    <h1>Active Hotshots.</h1>
+                    <p><%= activeCount %> Hotshots.</p>
+                </div>
+                <div class="item stat">
+                    <h1>No. Hotshot Apps.</h1>
+                    <p><%= pendingCount %> Applications.</p>
+                </div>
+            </div>
+            <h5>Internal Applications</h5>
+            <div class="itemRow">
+                <div class="item action">
+                    <a href="./hotshotManager">
+                        Hotshot Manager
+                    </a>
+                </div>
+                <div class="item action">
+                    <a href="/docs">
+                        API Documentation
+                    </a>
+                </div>
+                <div class="item">
+                    <!-- Coming soon -->
+                </div>           
+            </div>
+        </div>
+    </main>
+</body>
+</html>

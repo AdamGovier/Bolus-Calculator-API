@@ -78,9 +78,48 @@ router.get('/get/:type', (req, res) => res.status(400).json(new ErrorResponse("M
 
 /**
  * @swagger
+ * /api/hotshots/thumbnail/{image}:
+ *  get:
+ *      summary: Retrieve a Hotshot thumbnail by providing the filename.
+ *      tags:
+ *          - Hotshots
+ *      parameters:
+ *          - in: path
+ *            name: image
+ *            required: true
+ *            description: The image to view. The filename is retrieved using GET /api/hotshots/get/{type}/{value}
+ *            schema:
+ *              type: string
+ *              example: "7b748375-9969-4027-b803-e6f7e533615b.jpg"
+ *      responses:
+ *          500:
+ *              description: 500 Internal Server Error. Returns a thumbnail with "No image found" imprinted.
+ *              content:
+ *                  application/json:
+ *                      schmea:
+ *                          type: file
+ *          404:
+ *              description: Not Found. Returns a thumbnail with "No image found" imprinted.
+ *              content:
+ *                  application/json:
+ *                      schmea:
+ *                          type: file
+ *          200:
+ *              description: OK. Returns the queried image.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                           type: file
+ */
+router.get('/thumbnail/:image', thumbnailController);
+router.get('/thumbnail/', (req, res) => res.status(400).json(new ErrorResponse("Missing required url parameters (image), please refer to the documentation.")));
+router.post('/thumbnail', (req, res) => res.status(400).json(new ErrorResponse("POST method not supported, did you mean to use the GET method?")));
+
+/**
+ * @swagger
  * /api/hotshots/create:
  *  post:
- *      summary: Finds hotshots with the specified search parameters.
+ *      summary: Creates a hotshot with the specified search parameters.
  *      tags:
  *          - Hotshots
  *      consumes:
@@ -168,44 +207,5 @@ router.get('/get/:type', (req, res) => res.status(400).json(new ErrorResponse("M
  */
 router.post('/create', createController);
 router.get('/create', (req, res) => res.status(400).json(new ErrorResponse("GET method not supported, did you mean to use the POST method?")));
-
-/**
- * @swagger
- * /api/hotshots/thumbnail/{image}:
- *  get:
- *      summary: Retrieve a Hotshot thumbnail by providing the filename.
- *      tags:
- *          - Hotshots
- *      parameters:
- *          - in: path
- *            name: image
- *            required: true
- *            description: The image to view. The filename is retrieved using GET /api/hotshots/get/{type}/{value}
- *            schema:
- *              type: string
- *              example: "7b748375-9969-4027-b803-e6f7e533615b.jpg"
- *      responses:
- *          500:
- *              description: 500 Internal Server Error. Returns a thumbnail with "No image found" imprinted.
- *              content:
- *                  application/json:
- *                      schmea:
- *                          type: file
- *          404:
- *              description: Not Found. Returns a thumbnail with "No image found" imprinted.
- *              content:
- *                  application/json:
- *                      schmea:
- *                          type: file
- *          200:
- *              description: OK. Returns the queried image.
- *              content:
- *                  application/json:
- *                      schema:
- *                           type: file
- */
-router.get('/thumbnail/:image', thumbnailController);
-router.get('/thumbnail/', (req, res) => res.status(400).json(new ErrorResponse("Missing required url parameters (image), please refer to the documentation.")));
-router.post('/thumbnail', (req, res) => res.status(400).json(new ErrorResponse("POST method not supported, did you mean to use the GET method?")));
 
 export default router;
