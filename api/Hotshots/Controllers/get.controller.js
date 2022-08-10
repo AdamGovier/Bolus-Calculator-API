@@ -21,7 +21,7 @@ export default async (req, res) => {
         res.status(hotshots.length ? 200 : 404).json(
             hotshots.map(hotshot => {
                 return {
-                    _id : hotshot._id.toString(),
+                    id : hotshot._id.toString(),
                     name: hotshot.name,
                     carbs: parseFloat(hotshot.carbohydrates),
                     weight: parseFloat(hotshot.weight),
