@@ -11,7 +11,7 @@ import swaggerUi from 'swagger-ui-express';
 
 // Import Routes
 import hotshotsRoute from "./api/Hotshots/hotshots.routes.js";
-import adminRoutes from "./routes/admin.routes.js";
+import adminRoutes from "./api/Admin/admin.routes.js";
 
 // Other imports.
 import mongoose from 'mongoose';
@@ -52,7 +52,8 @@ app.use(session({
 
 // Use Routes
 app.use('/api/hotshots', hotshotsRoute);
-app.use('/admin', adminRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/admin', express.static('public/admin/dist'));
 
 // Start server.
 app.listen(port, () => {

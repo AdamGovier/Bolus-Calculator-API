@@ -2,7 +2,7 @@
     <v-app>
         <Navbar/>
 
-        <v-main>
+        <v-main class="mx-6 my-8">
             <router-view></router-view>
         </v-main>
 

@@ -1,3 +1,5 @@
 <template>
-    <p>Tickets</p>
+    <section>
+        <v-subheader>Tickets</v-subheader>
+    </section>
 </template>

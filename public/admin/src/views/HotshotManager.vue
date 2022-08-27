@@ -1,3 +1,5 @@
 <template>
-    <p>Hotshot Manager</p>
+    <section>
+        <v-subheader>Hotshot Manager</v-subheader>
+    </section>
 </template>

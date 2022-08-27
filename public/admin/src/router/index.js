@@ -4,6 +4,7 @@ import Overview from '@/views/Overview.vue';
 import HotshotManager from '@/views/HotshotManager.vue';
 import Tickets from "@/views/Tickets.vue";
 import Users from "@/views/Users.vue";
+import Login from "@/views/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/Users',
     name: 'Users',
     component: Users
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: Login
   }
 ];
 
