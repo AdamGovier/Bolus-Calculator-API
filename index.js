@@ -2,7 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
-import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 // Documentation imports.
@@ -32,7 +32,14 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 // Fixes: "has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
-app.use(cors());
+app.use(cors({
+    exposedHeaders: 'access-token',
+    credentials: true,
+    origin: ['http://localhost:8080'] // Local front end for testing purposes only.
+}));
+
+// Parse cookies for authentication purposes.
+app.use(cookieParser());
 
 // Parse JSON bodies.
 app.use(bodyParser.json());
@@ -42,13 +49,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Retrieve uploaded files.
 app.use(fileUpload());
-
-// Initialise session middleware
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false, // Session only saved when modified rather than everytime.
-    saveUninitialized: false // Don't save empty sessions with any default values.
-}));
 
 // Use Routes
 app.use('/api/hotshots', hotshotsRoute);

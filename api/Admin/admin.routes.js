@@ -1,31 +1,22 @@
-// Imports
+// Packages
 import express from 'express';
-import axios from "axios";
 import bcrypt from 'bcrypt';
 
-import Hotshot from "../Hotshots/Models/hotshot.schema.js";
+// Controllers
+import statusController from './Controllers/status.controller.js';
+import loginController from './Controllers/login.controller.js';
+import getTokenController from './Controllers/getToken.controller.js';
+import logoutController from './Controllers/logout.controller.js';
+
+// Middleware
+import requireAuth from './middleware/requireAuth.js';
 
 const router = express.Router();
 
-router.get('/status', async (req, res) => {
-    // Get uptime from Uptime Robot
-    const getUptime = async () => await axios.post('https://api.uptimerobot.com/v2/getMonitors', {
-        api_key: process.env.uptimeRobotApiKey,
-        all_time_uptime_ratio: 1,
-        response_times: 1
-    });
-
-    // Select our specific monitor. i.e. this API.
-    const apiStatus = (await getUptime()).data.monitors.filter(m => m.id == process.env.uptimeRobotMonitorID)[0];
-
-    // Return data to client.
-    res.status(200).json({
-        all_time_uptime_ratio: apiStatus.all_time_uptime_ratio,
-        average_response_time: apiStatus.average_response_time,
-        processUptime: process.uptime(),
-        environmentBuild: process.env.environmentBuild
-    })
-});
+router.get('/status', requireAuth, statusController);
+router.post('/login', loginController);
+router.post('/refreshToken', getTokenController);
+router.delete('/logout', requireAuth, logoutController);
 
 // // Sign in Form.
 

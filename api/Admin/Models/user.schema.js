@@ -5,7 +5,11 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    username: {required: true, type: String},
+    username: {
+        required: true, 
+        unique: true,
+        type: String
+    },
     password: {required: true, type: String},
     permisionLevel: {
         required: true, 
@@ -17,4 +21,4 @@ const userSchema = new Schema({
     }
 })
 
-export default mongoose.model('user', userSchema);
+export default mongoose.model('admin.user', userSchema);

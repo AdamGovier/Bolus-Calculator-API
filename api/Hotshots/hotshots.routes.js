@@ -4,7 +4,7 @@ import createController from './Controllers/create.controller.js';
 import thumbnailController from "./Controllers/thumbnail.controller.js";
 
 // Responses
-import ErrorResponse from '../Responses/error.response.js';
+import ErrorResponse from '../Shared/Responses/error.response.js';
 
 // Express Router
 import express from 'express';
