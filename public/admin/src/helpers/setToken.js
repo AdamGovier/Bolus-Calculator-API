@@ -7,6 +7,6 @@ import axios from "axios";
 export default token => {
     axios.defaults.headers.common = {
         "X-Requested-With": "XMLHttpRequest",
-        "auth-token": token
+        "access-token": token
     }
 }

@@ -8,7 +8,7 @@ export default (req, res, next) => {
     const token = req.header('access-token');
 
     if (!token) return res.status(401).json(new ErrorResponse("User is not authroised to access this resource.", {redirect: process.env.UNAUTHENTICATED_REDIRECT_PATH}));
-    
+
     try {
         const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         

@@ -4,6 +4,7 @@ import ErrorResponse from "../../Shared/Responses/error.response.js";
 import log from "../../Shared/Helpers/log.js";
 import bcrypt from "bcrypt";
 import tokens from "../helpers/tokens.js";
+import ms from "ms";
 
 export default async (req, res) => {
     const {username, password} = req.body;
@@ -42,7 +43,10 @@ export default async (req, res) => {
     const refreshToken = tokens.createRefreshToken(username);
 
     res.header('access-token', accessToken);
-    res.cookie("refresh-token", refreshToken);
+    res.cookie("refresh-token", refreshToken, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1 * 1000 * 60 * 60 * 24 * 30), // 30 days
+    });
 
     const tokenStore = new RefreshToken({token: refreshToken});
     await tokenStore.save();
@@ -51,6 +55,6 @@ export default async (req, res) => {
         errorCode: 200,
         hint: `Admin: "${username}" has successfully logged in.`
     }, () => 
-        res.status(200).json({success: true, message: "Authenticated."})
+        res.status(200).json({success: true, message: "Authenticated.", expiresIn: ms(process.env.ACCESS_EXPIRE_AFTER)})
     )
 }

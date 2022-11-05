@@ -49,13 +49,12 @@ export default {
         const runServiceCheck = async () => {
             const res = (await axios.get(`${config.endpoint}/api/admin/status`)).data;
 
-            console.log(res);
-
             this.uptimeRatio = res.all_time_uptime_ratio;
             this.avgResTime = res.average_response_time;
             this.processUptime = res.processUptime;
             this.environmentBuild = res.environmentBuild;
         }
+
 
         runServiceCheck(); // Initial Check
         setInterval(runServiceCheck, (5 * 60) * 1000);

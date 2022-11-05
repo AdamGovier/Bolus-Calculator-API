@@ -61,7 +61,8 @@
 
 <script>
 import axios from "axios";
-import setToken from "../helpers/setToken";
+import setToken from "../helpers/setToken.js";
+import refreshToken from "../helpers/refreshToken.js";
 import config from "@/config.json";
 
 export default {
@@ -95,14 +96,25 @@ export default {
                 username: this.username,
                 password: this.password
             }).then(res => {
-                setToken(res.headers["auth-token"]);
+                setToken(res.headers["access-token"]);
                                 
                 // Success field is missing from response body.
                 if(!res.data?.success) return alert("Unknown error, please try again later.");
                 
-                if(res.data.success) return this.$router.push("/");
+                try {
+                    refreshToken();
+                } catch (error) {
+                    switch (error.response.status) {
+                        case 401:
+                            this.$router.push('/login')
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                }
 
-                
+                if(res.data.success) return this.$router.push("/");
             }).catch(err => {
                 this.loading = false;
 

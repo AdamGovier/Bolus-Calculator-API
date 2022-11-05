@@ -2,7 +2,7 @@
     <v-app>
         <Navbar/>
 
-        <v-main class="mx-6 my-8">
+        <v-main v-if="authStatusRecieved" class="mx-6 my-8">
             <router-view></router-view>
         </v-main>
 
@@ -11,11 +11,32 @@
 
 <script>
 import Navbar from "@/components/Navbar/Navbar.vue";
+import refreshToken from "./helpers/refreshToken";
 
 export default {
     name: 'App',
     components: {
         Navbar
+    },
+    data() {
+        return {
+            authStatusRecieved: false
+        }
+    },
+    async mounted() {
+        try {
+            await refreshToken();
+        } catch (error) {
+            switch (error.response.status) {
+                case 401:
+                    this.$router.push('/login')
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+        this.authStatusRecieved = true;
     }
 };
 </script>
