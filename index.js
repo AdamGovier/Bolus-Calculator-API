@@ -28,9 +28,6 @@ mongoose.connect("mongodb://localhost:27017/boluscalc");
 // Set template engine for admin panel.
 app.set('view engine', 'ejs');
 
-// Set public directory for the css & other assets of the admin panel.
-app.use(express.static('public'));
-
 // Fixes: "has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
 app.use(cors({
     exposedHeaders: 'access-token',
@@ -54,6 +51,7 @@ app.use(fileUpload());
 app.use('/api/hotshots', hotshotsRoute);
 app.use('/api/admin', adminRoutes);
 app.use('/admin', express.static('public/admin/dist'));
+app.get('/', (req,res) => res.send("Bolus Calc API Alpha"))
 
 // Start server.
 app.listen(port, () => {
