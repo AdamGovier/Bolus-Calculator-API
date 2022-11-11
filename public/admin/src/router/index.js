@@ -37,7 +37,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+//   mode: 'history', // https://www.bezkoder.com/serve-vue-app-express/ # Vue Router Refresh – Not found 404 error
   base: '/admin/',
   routes
 });

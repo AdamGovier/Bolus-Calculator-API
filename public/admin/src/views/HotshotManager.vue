@@ -32,16 +32,27 @@
                         <v-img :src="item.image" :alt="item.name" width="200px"></v-img>
                     </div>  
                 </template>
+
+                <template v-slot:item.action="{ item }">
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <v-btn @click="approveHotshot(item.id)" v-if="item.status !== 'Active'" color="success">
+                            Add
+                        </v-btn>
+                        <v-btn @click="removeHotshot(item.id)" v-if="item.status !== 'Archived'" color="danger" class="white--text">
+                            Remove
+                        </v-btn>
+                    </div>
+                </template>
             </v-data-table>
         </v-card>
     </section>
 </template>
 
 <script>
-    import config from "@/config.json";
-    import axios from "axios";
+import config from "@/config.json";
+import axios from "axios";
 
-    export default {
+export default {
     mounted() {
         this.requestData();
     },
@@ -50,20 +61,40 @@
             this.items = [];
 
             this.resultsLoading = true;
+            
+            try {
+                const res = (await axios.get(`${config.endpoint}/api/admin/mgmt/hotshot/get/${this.currentStatus}`)).data;
 
-            const res = (await axios.get(`${config.endpoint}/api/admin/mgmt/hotshot/get/${this.currentStatus}`)).data;
-
-            this.items = res.map(item => {
-                return {
-                    image: `${config.endpoint}/api/hotshots/thumbnail/${item.imagePath}`,
-                    name: item.name,
-                    carbs: item.carbs,
-                    weight: item.weight,
-                    barcode: item.barcode ?? "N/A"
-                }
-            });
+                this.items = res.map(item => {
+                    return {
+                        image: `${config.endpoint}/api/hotshots/thumbnail/${item.imagePath}`,
+                        name: item.name,
+                        carbs: item.carbs,
+                        weight: item.weight,
+                        barcode: item.barcode ?? "N/A",
+                        id: item.id,
+                        status: item.status.charAt(0).toUpperCase() + item.status.slice(1)
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+            }
 
             this.resultsLoading = false;
+        },
+        async approveHotshot(ID) {
+            await axios.post(`${config.endpoint}/api/admin/mgmt/hotshot/approve`, new URLSearchParams({
+                'ID': ID
+            }))
+
+            await this.requestData();
+        },
+        async removeHotshot(ID) {
+            await axios.post(`${config.endpoint}/api/admin/mgmt/hotshot/reject`, new URLSearchParams({
+                'ID': ID
+            }));
+
+            await this.requestData();
         }
     },
     data() {
@@ -88,11 +119,13 @@
                 },
                 { text: 'Weight (g)', value: 'weight' },
                 { text: 'Barcode', value: 'barcode', sortable: false},
+                { text: 'Status', value: 'status'},
+                { text: 'Actions', value: 'action', sortable: false}
 
             ],
             items: [],
             status: ["Pending", "Active", "Archived", "All"]
         }
     },
-    }
+}
 </script>

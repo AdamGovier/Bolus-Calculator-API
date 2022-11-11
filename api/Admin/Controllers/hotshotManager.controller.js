@@ -27,3 +27,44 @@ export const getHotshots = async (req,res) => {
         }})
     );
 }
+
+const setStatus = async (id, status) => {
+    const hotshot = await Hotshot.findById(id);
+
+    hotshot.status = status;
+
+    await hotshot.save();
+}
+
+export const acceptHotshot = async (req,res) => {
+    try {
+        const {ID} = req.body;
+
+        if(!ID) return res.status(400).json(new ErrorResponse('Invalid ID provided.'));
+    
+        await setStatus(ID, "active");
+    
+        res.status(200).json({
+            msg: "Hotshot activated."
+        });
+    } catch (err) {
+        res.status(500).json(new ErrorResponse("Server error."));
+    }
+}
+
+
+export const rejectHotshot = async (req,res) => {
+    try {
+        const {ID} = req.body;
+
+        if(!ID) return res.status(400).json(new ErrorResponse('Invalid ID provided.'));
+
+        await setStatus(ID, "archived");
+
+        res.status(200).json({
+            msg: "Hotshot set to pending."
+        });
+    } catch (err) {
+        res.status(500).json(new ErrorResponse("Server error."));
+    }
+}

@@ -30,9 +30,9 @@ app.set('view engine', 'ejs');
 
 // Fixes: "has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
 app.use(cors({
-    exposedHeaders: 'access-token',
+    exposedHeaders: ['access-token'],
     credentials: true,
-    origin: ['http://localhost:8080'] // Local front end for testing purposes only.
+   //  origin: ['http://localhost:8080'] // Local front end for testing purposes only.
 }));
 
 // Parse cookies for authentication purposes.
