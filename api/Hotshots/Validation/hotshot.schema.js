@@ -6,7 +6,7 @@ import Barcoder from "barcoder";
 const hotshotSchema = Joi.object({
     name: Joi.string().required(),
     carbohydrates: Joi.number().greater(0).less(250).required(),
-    weight: Joi.number().greater(0).less(1000),
+    weight: Joi.number().greater(0).less(1000).allow(null, ''),
     image: Joi.any(),
     barcode: Joi.string().custom((value, helper) => {
         // && value so it allows undefined values.

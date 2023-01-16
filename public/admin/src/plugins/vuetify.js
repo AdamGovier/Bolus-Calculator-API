@@ -12,7 +12,8 @@ export default new Vuetify({
                 accent: '#ef4d5a',
                 error: '#d9534f',
                 success: '#5cb85c',
-                danger: '#d9534f'
+                danger: '#d9534f',
+                info: '428bca'
             }
         }
     }

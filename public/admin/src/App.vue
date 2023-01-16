@@ -40,3 +40,13 @@ export default {
     }
 };
 </script>
+
+<style>
+.scale-enter-active, .scale-leave-active {
+    transition: width 5s
+}
+.scale-enter, .scale-leave-to {
+    width: 0%;
+    height: 0%;
+}
+</style>

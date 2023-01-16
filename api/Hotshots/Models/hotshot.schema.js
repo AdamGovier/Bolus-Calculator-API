@@ -31,7 +31,8 @@ const hotshotsSchema = new Schema({
             message: props => `${props.value} is not a valid status.`
         },
         required: true
-    }
-}, {timestamp: true});
+    },
+    createdAt: {type: Date, default: Date.now}
+});
 
 export default mongoose.model('hotshot', hotshotsSchema);

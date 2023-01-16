@@ -7,7 +7,7 @@ export const getHotshots = async (req,res) => {
 
     const {status, keyword} = req.params;
 
-    if(!statusTypes.includes(status)) return res.status(400).json(new ErrorResponse('Invalid status, please provide a valid enum: "pending", "active", "archived", "all"'));
+    if(!statusTypes.includes(status)) return res.status(400).json(new ErrorResponse('Invalid status, please provide a valid enum: "Pending", "Active", "Archived", "All"'));
     
     const hotshots = await Hotshot.find({
         // In case of status == "all" provide an empty string otherwise provide the status type provided.
@@ -16,14 +16,15 @@ export const getHotshots = async (req,res) => {
     });
 
     res.status(hotshots.length ? 200 : 404).json(
-        hotshots.map(hotshot => { return {
+        hotshots.map(hotshot => {return {
             id: hotshot.id,
             name: hotshot.name,
             carbs: parseFloat(hotshot.carbohydrates),
             weight: parseFloat(hotshot.weight),
             imagePath: hotshot.imagePath,
             barcode: hotshot.barcode,
-            status: hotshot.status
+            status: hotshot.status,
+            createdAt: hotshot.createdAt
         }})
     );
 }

@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 app.use(cors({
     exposedHeaders: ['access-token'],
     credentials: true,
-   //  origin: ['http://localhost:8080'] // Local front end for testing purposes only.
+    origin: ['http://localhost:8080'] // Local front end for testing purposes only.
 }));
 
 // Parse cookies for authentication purposes.

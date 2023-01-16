@@ -38,6 +38,7 @@
                         <v-btn @click="approveHotshot(item.id)" v-if="item.status !== 'Active'" color="success">
                             Add
                         </v-btn>
+                        <EditDialog :hotshot="{ name: 'Pizza' }" />
                         <v-btn @click="removeHotshot(item.id)" v-if="item.status !== 'Archived'" color="danger" class="white--text">
                             Remove
                         </v-btn>
@@ -50,9 +51,15 @@
 
 <script>
 import config from "@/config.json";
+import {formatDateDDMMYYY} from "../helpers/utils";
 import axios from "axios";
 
+import EditDialog from "../components/pages/HotshotManager/EditDialog.vue"
+
 export default {
+    components: {
+        EditDialog
+    },
     mounted() {
         this.requestData();
     },
@@ -73,7 +80,8 @@ export default {
                         weight: item.weight,
                         barcode: item.barcode ?? "N/A",
                         id: item.id,
-                        status: item.status.charAt(0).toUpperCase() + item.status.slice(1)
+                        status: item.status.charAt(0).toUpperCase() + item.status.slice(1),
+                        createdAt: formatDateDDMMYYY(item.createdAt)
                     }
                 });
             } catch (e) {
@@ -120,8 +128,8 @@ export default {
                 { text: 'Weight (g)', value: 'weight' },
                 { text: 'Barcode', value: 'barcode', sortable: false},
                 { text: 'Status', value: 'status'},
+                { text: 'CreatedAt', value: 'createdAt'},
                 { text: 'Actions', value: 'action', sortable: false}
-
             ],
             items: [],
             status: ["Pending", "Active", "Archived", "All"]
