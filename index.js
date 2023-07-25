@@ -23,7 +23,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Database connection
-mongoose.connect("mongodb://localhost:27017/boluscalc");
+mongoose.connect(process.env.mongo_connection_string);
 
 // Set template engine for admin panel.
 app.set('view engine', 'ejs');
