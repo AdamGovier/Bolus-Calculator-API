@@ -54,6 +54,9 @@ jobs:
       - name: Delete zip file.
         run: rm release.zip
 
+      - name: Delete uncompiled client apps
+        run: rm -r ./client
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
