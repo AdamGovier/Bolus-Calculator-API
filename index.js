@@ -50,7 +50,7 @@ app.use(fileUpload());
 // Use Routes
 app.use('/api/hotshots', hotshotsRoute);
 app.use('/api/admin', adminRoutes);
-app.use('/admin', express.static('public/admin/dist'));
+app.use('/admin', express.static('public/admin'));
 app.get('/', (req,res) => res.send("Bolus Calc API Alpha"))
 
 // Start server.
