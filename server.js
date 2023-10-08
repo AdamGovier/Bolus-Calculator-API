@@ -20,7 +20,7 @@ import 'dotenv/config';
 
 
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.PORT || 3000;
 
 // Database connection
 mongoose.connect(process.env.mongo_connection_string);
