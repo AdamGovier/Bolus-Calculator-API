@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd ./client/admin && npm run build",
+    "build:production": "cd ./client/admin && npm install && npm run build",
     "build:local": "cd ./client/admin && npm run build:local"
   },
   "author": "Adam Govier",
