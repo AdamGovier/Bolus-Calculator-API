@@ -2,7 +2,7 @@ import User from "../Models/User.schema.js";
 import RefreshToken from "../Models/RefreshToken.schema.js";
 import ErrorResponse from "../../Shared/Responses/error.response.js";
 import log from "../../Shared/Helpers/log.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import tokens from "../helpers/tokens.js";
 import ms from "ms";
 

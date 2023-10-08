@@ -1,6 +1,6 @@
 // Node createHash.js // create a password for an admin user.
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import promptSync from 'prompt-sync';
 
 const prompt = promptSync();

@@ -1,6 +1,5 @@
 // Packages
 import express from 'express';
-import bcrypt from 'bcrypt';
 
 // Controllers
 import statusController from './Controllers/status.controller.js';
