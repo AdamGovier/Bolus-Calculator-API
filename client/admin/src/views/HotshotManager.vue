@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import config from "@/config.json";
 import {formatDateDDMMYYY} from "../helpers/utils";
 import axios from "axios";
 
@@ -70,11 +69,11 @@ export default {
             this.resultsLoading = true;
             
             try {
-                const res = (await axios.get(`${config.endpoint}/api/admin/mgmt/hotshot/get/${this.currentStatus}`)).data;
+                const res = (await axios.get(`${process.env.VUE_APP_ENDPOINT}/api/admin/mgmt/hotshot/get/${this.currentStatus}`)).data;
 
                 this.items = res.map(item => {
                     return {
-                        image: `${config.endpoint}/api/hotshots/thumbnail/${item.imagePath}`,
+                        image: `${process.env.VUE_APP_ENDPOINT}/api/hotshots/thumbnail/${item.imagePath}`,
                         name: item.name,
                         carbs: item.carbs,
                         weight: item.weight,
@@ -91,14 +90,14 @@ export default {
             this.resultsLoading = false;
         },
         async approveHotshot(ID) {
-            await axios.post(`${config.endpoint}/api/admin/mgmt/hotshot/approve`, new URLSearchParams({
+            await axios.post(`${process.env.VUE_APP_ENDPOINT}/api/admin/mgmt/hotshot/approve`, new URLSearchParams({
                 'ID': ID
             }))
 
             await this.requestData();
         },
         async removeHotshot(ID) {
-            await axios.post(`${config.endpoint}/api/admin/mgmt/hotshot/reject`, new URLSearchParams({
+            await axios.post(`${process.env.VUE_APP_ENDPOINT}/api/admin/mgmt/hotshot/reject`, new URLSearchParams({
                 'ID': ID
             }));
 

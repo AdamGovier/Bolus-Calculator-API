@@ -1,6 +1,5 @@
 import axios from "axios";
 import setToken from "./setToken";
-import config from "@/config.json";
 
 /**
  * @description Refresh the access-token
@@ -17,7 +16,7 @@ export default async (router) => {
     return;
 
     async function refresher() {
-        const res = await axios.post(`${config.endpoint}/api/admin/refreshToken`);
+        const res = await axios.post(`${process.env.VUE_APP_ENDPOINT}/api/admin/refreshToken`);
     
         // If not successful in refreshing access token.
         if(res.data.error) return router.push(`${res.data.redirect}`);

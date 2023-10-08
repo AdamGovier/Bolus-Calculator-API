@@ -63,7 +63,6 @@
 import axios from "axios";
 import setToken from "../helpers/setToken.js";
 import refreshToken from "../helpers/refreshToken.js";
-import config from "@/config.json";
 
 export default {
     data() {
@@ -92,7 +91,7 @@ export default {
 
             this.loading = true;
 
-            axios.post(`${config.endpoint}/api/admin/login`, {
+            axios.post(`${process.env.VUE_APP_ENDPOINT}/api/admin/login`, {
                 username: this.username,
                 password: this.password
             }).then(res => {

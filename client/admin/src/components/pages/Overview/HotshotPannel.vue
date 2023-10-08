@@ -41,14 +41,13 @@
 </template>
 
 <script>
-import config from "@/config.json";
 import {formatDateDDMMYYY} from "../../../helpers/utils";
 import axios from "axios";
 
 export default {
     async mounted() {
         const getHotshots = async () => {
-            return (await axios.get(`${config.endpoint}/api/admin/mgmt/hotshot/get/All`)).data;
+            return (await axios.get(`${process.env.VUE_APP_ENDPOINT}/api/admin/mgmt/hotshot/get/All`)).data;
         }
 
         const results = await getHotshots();

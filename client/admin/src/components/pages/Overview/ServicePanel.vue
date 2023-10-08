@@ -41,13 +41,12 @@
 </style>
 
 <script>
-import config from "@/config.json";
 import axios from "axios";
 
 export default {
     async mounted() {
         const runServiceCheck = async () => {
-            const res = (await axios.get(`${config.endpoint}/api/admin/status`)).data;
+            const res = (await axios.get(`${process.env.VUE_APP_ENDPOINT}/api/admin/status`)).data;
 
             this.uptimeRatio = res.all_time_uptime_ratio;
             this.avgResTime = res.average_response_time;
