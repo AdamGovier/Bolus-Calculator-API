@@ -61,7 +61,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'BC-API-PRODUCTION'
+          app-name: 'BC-API-PROD'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B52C926562634459BFFF36393F6092D1 }}
           package: .
