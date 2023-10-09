@@ -57,10 +57,8 @@ jobs:
       - name: Delete uncompiled client apps
         run: rm -r ./client
 
-      - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
+      - name: DigitalOcean App Platform deployment
+        uses: digitalocean/app_action@v1.1.5
         with:
-          app-name: 'BC-API-PRODUCTION'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B52C926562634459BFFF36393F6092D1 }}
-          package: .
+          app_name: bolus-calculator-production
+          token: ${{ secrets.DIGITAL_OCEAN_API_KEY }}
