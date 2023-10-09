@@ -1,5 +1,4 @@
 import ErrorResponse from '../../Shared/Responses/error.response.js';
-import log from "../../Shared/Helpers/log.js";
 import Hotshot from "../../Hotshots/Models/Hotshot.schema.js";
 
 export const getHotshots = async (req,res) => {
