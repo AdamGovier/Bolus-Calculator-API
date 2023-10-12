@@ -50,7 +50,7 @@ app.use(fileUpload());
 app.use('/api/hotshots', hotshotsRoute);
 app.use('/api/admin', adminRoutes);
 if(process.env.NODE_ENV === "production") {
-    app.use('/admin', express.static("D:/home/site/wwwroot/public/admin"));
+    app.use('/admin', express.static("C:/home/site/wwwroot/public/admin"));
 } else {
     app.use('/admin', express.static('public/admin'));
 }
