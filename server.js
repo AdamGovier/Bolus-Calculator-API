@@ -17,7 +17,10 @@ import adminRoutes from "./api/Admin/admin.routes.js";
 import mongoose from 'mongoose';
 import fs from 'fs';
 import 'dotenv/config';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -50,7 +53,7 @@ app.use(fileUpload());
 // Use Routes
 app.use('/api/hotshots', hotshotsRoute);
 app.use('/api/admin', adminRoutes);
-// app.use('/admin', express.static('public/admin'));
+app.use('/admin', express.static(path.join(__dirname, 'public/admin')));
 app.get('/', (req,res) => res.send("Bolus Calc API Alpha"))
 
 // Start server.
