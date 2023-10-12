@@ -49,9 +49,7 @@ app.use(fileUpload());
 // Use Routes
 app.use('/api/hotshots', hotshotsRoute);
 app.use('/api/admin', adminRoutes);
-if(process.env.NODE_ENV === "production") {
-    app.use('/admin', express.static("C:/home/site/wwwroot/public/admin"));
-} else {
+if(process.env.NODE_ENV === "development") {
     app.use('/admin', express.static('public/admin'));
 }
 app.get('/', (req,res) => res.send("Bolus Calc API Alpha"))
